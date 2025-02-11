@@ -1,0 +1,35 @@
+# Name of the workflow
+name: Node.js CI  
+
+# Define the events that will trigger the workflow
+on:
+    # Trigger on push events to the 'main' branch
+    push:
+        branches: [main]  
+    # Trigger on pull request events targeting the 'main' branch
+    pull_request:
+        branches: [main]  
+
+jobs:
+    # Define a job called 'build'
+    build:
+        # Set the environment to run on an Ubuntu runner
+        runs-on: ubuntu-latest  
+
+        # Define the steps within the job
+        steps:
+            # Checkout the code from the repository
+            - uses: actions/checkout@v3  
+            
+            # Set up Node.js version 22 on the runner
+            - name: Use Node.js  
+              uses: actions/setup-node@v2  
+              with:
+                  # Specify the Node.js version (v22.11.0)
+                  node-version: "22"  
+
+            # Install dependencies defined in the package.json file
+            - run: npm install  
+
+            # Run the tests defined in the 'test' script in package.json
+            - run: npm test  
