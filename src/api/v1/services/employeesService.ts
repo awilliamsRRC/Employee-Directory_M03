@@ -2,10 +2,11 @@ export type Employee = {
     id: string;
     name: string;
     position: string;
+    department: string;
     email:string;
     phone:string;
     branchId: number;
-    department: string;
+    
 };
 
 const employees: Employee[] = [];
@@ -33,9 +34,8 @@ export const serviceCreateEmployee = async (employee: {
 
 export const serviceUpdateEmployee = async (
     id: string,
-    employeeUpdate: Employee
-): Promise<Employee> => {
-    
+    employee: { name: string; position: string; department: string; email:string; phone:string; branchId: number;}
+): Promise<Employee> => { 
     const index: number = employees.findIndex((i) => i.id === id);
     
     if (index === -1) {
@@ -43,7 +43,7 @@ export const serviceUpdateEmployee = async (
     }
 
     
-    employees[index] = {   ...employeeUpdate, id: employees[index].id };
+    employees[index] = {   id, ...employee };
 
     return employees[index];
 };

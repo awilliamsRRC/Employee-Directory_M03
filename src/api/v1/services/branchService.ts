@@ -1,3 +1,4 @@
+import { Request, Response, NextFunction } from "express";
 export type Branch = {
     id: string;
     name: string;
@@ -25,7 +26,7 @@ export const serviceCreateBranches = async (branch: {
 
 export const serviceUpdateBranches = async (
     id: string,
-    branchUpdate: Branch
+    branch: {name: string; address: string; phone:string;}
 ): Promise<Branch> => {
     
     const index: number = branches.findIndex((i) => i.id === id);
@@ -35,7 +36,7 @@ export const serviceUpdateBranches = async (
     }
 
     
-    branches[index] = {   ...branchUpdate, id: branches[index].id };
+    branches[index] = {   id,...branch };
 
     return branches[index];
 };

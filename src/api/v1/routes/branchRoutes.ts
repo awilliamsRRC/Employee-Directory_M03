@@ -1,5 +1,7 @@
 import express, { Router } from "express";
 import * as branchController from "../controllers/branchController";
+import { branchSchema } from "../schemas/branchSchema";
+import { validateRequest } from "../middleware/validate";
 const routerBranch: Router = express.Router();
 
 
@@ -71,7 +73,7 @@ routerBranch.get("/", branchController.controllerGetAllBranches);
  *       500:
  *         description: Internal server error
  */
-routerBranch.post("/", branchController.controllerCreateBranches);
+routerBranch.post("/", validateRequest(branchSchema),branchController.controllerCreateBranches);
 
 /**
  * @openapi
@@ -109,7 +111,7 @@ routerBranch.post("/", branchController.controllerCreateBranches);
  *       500:
  *         description: Internal server error
  */
-routerBranch.put("/:id", branchController.controllerUpdateBranches);
+routerBranch.put("/:id", validateRequest(branchSchema), branchController.controllerUpdateBranches);
 
 /**
  * @openapi

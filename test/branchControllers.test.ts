@@ -35,8 +35,8 @@ describe('Branches Controller', () => {
     it('should call getAllBranches controller', async () => {
       
       const mockBranches = [
-        { id: '1', name: 'Branch 1', address: '123 Street', phone: '1234567890' },
-        { id: '2', name: 'Branch 2', address: '456 Avenue', phone: '0987654321' },
+        { id: '1', name: 'Branch 1', address: '123 Street', phone: '1234567890' }
+        
       ];
       (branchService.serviceGetAllBranches as jest.Mock).mockResolvedValue(mockBranches);
 
@@ -100,12 +100,12 @@ describe('Branches Controller', () => {
   describe('PUT /api/v1/branches/:id', () => {
     it('should call updateBranch controller', async () => {
       // Arrange: mock the service method to return the updated branch
-      const updatedBranch = { id: '1', name: 'Updated Branch', address: '123 Updated Street', phone: '54321' };
+      const updatedBranch = { id: '1', name: 'Updated Branch', address: '123 Updated Street', phone: '123456789' };
       (branchService.serviceUpdateBranches as jest.Mock).mockResolvedValue(updatedBranch);
 
       // Act: Call the controller method with mock request, response, and next function
       mockReq.params = { id: '1' }; // Simulate the branch ID in params
-      mockReq.body = { name: 'Updated Branch', address: '123 Updated Street', phone: '54321' }; // Simulate incoming data
+      mockReq.body = { name: 'Updated Branch', address: '123 Updated Street', phone: '123456789' }; 
       await branchController.controllerUpdateBranches(mockReq as Request, mockRes as Response, mockNext);
 
       // Assert: Verify that the service method was called with the correct arguments

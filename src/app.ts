@@ -5,6 +5,10 @@ import employeeRoutes from "./api/v1/routes/employeeRoutes";
 import branchRoutes from "./api/v1/routes/branchRoutes";
 import setupSwagger from "../config/swagger";
 
+import { controllerUpdateBranches } from './api/v1/controllers/branchController'; 
+
+
+
 const app: Express = express();
 setupSwagger(app);
 
@@ -28,6 +32,9 @@ app.get("/api/v1/health", (req:Request,res:Response) => {
 
 app.use("/api/v1/employees", employeeRoutes);
 app.use("/api/v1/branches", branchRoutes);
+
+
+
 export default app;
 
 

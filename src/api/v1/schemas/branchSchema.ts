@@ -1,6 +1,10 @@
-import Joi from 'joi';
+import Joi, { ObjectSchema } from 'joi';
 
-export const branchSchema =Joi.object({
+export const branchSchema: ObjectSchema =Joi.object({
+    id: Joi.string().required().messages({
+        'string.base': 'ID should be a type of string',
+        'any.required': 'ID is required',
+    }),
     name: Joi.string().min(3).max(100).required().messages({
         'string.base': 'Name should be type of string',
         'string.min': 'Name should have at least 3 charcters',

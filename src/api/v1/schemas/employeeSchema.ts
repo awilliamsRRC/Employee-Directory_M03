@@ -1,6 +1,6 @@
-import Joi, { ObjectSchema } from "joi";
+import Joi, { ObjectSchema } from 'joi';
 
-const employeeSchema = Joi.object({
+export const employeeSchema: ObjectSchema = Joi.object({
     name: Joi.string().min(3).max(50).required().messages({
         'string.base': 'Name should be a type string',
         'string.min': 'Name should have at least 3 charcters',

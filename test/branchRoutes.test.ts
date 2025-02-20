@@ -21,7 +21,7 @@ describe("Branch Routes", () => {
     });
 
     describe("GET /api/v1/branches", () => {
-        it("should call getAllVranches controller", async () => {
+        it("should call getAll Branches controller", async () => {
             const response = await request(app).get("/api/v1/branches");
             expect(controllerGetAllBranches).toHaveBeenCalled();
             expect(response.status).toBe(200);
@@ -30,13 +30,15 @@ describe("Branch Routes", () => {
 
     describe("POST /api/v1/branches", () => {
         it("should call createBranchescontroller", async () => {
-            const mockItem = {
-                name: "New BRanch",
+            const mockBranch = {
+                id:"1",
+                name: "Vancouver Branch",
                 address: "123 Main street",
-                phone: "123-456-1-778",
+                phone: "+1234567890",
             };
 
-            const response = await request(app).post("/api/v1/branches").send(mockItem);
+            const response = await request(app).post("/api/v1/branches").send(mockBranch);
+            
             expect(controllerCreateBranches).toHaveBeenCalled();
             expect(response.status).toBe(201);
         });
@@ -44,17 +46,21 @@ describe("Branch Routes", () => {
 
     describe("PUT /api/v1/branches/:id", () => {
         it("should call updateBranchescontroller", async () => {
-            const mockItem = {
-                name: "Updated branch",
-                address: "456 canada street",
-                phone:"987-456-456",
+            const mockBranch = {
+                id :"1",
+                name: "Vancouver Branch",
+                address: "123 Main street",
+                phone:"+1234567890",
             };
 
             const mockId = 1;
-
-            const response = await request(app).put(`/api/v1/branches/${mockId}`).send(mockItem);
+            
+            const response = await request(app).put(`/api/v1/branches/${mockId}`).send(mockBranch);
+            console.log('Response Body:', response.body);
+            
             expect(controllerUpdateBranches).toHaveBeenCalled();
             expect(response.status).toBe(200);
+            
 
         });
     });

@@ -52,7 +52,13 @@ describe("Employee Routes", () => {
             };
 
             const mockId = 1;  
-            await request(app).put(`/api/v1/employees/${mockId}`).send(mockEmployee);
+            // Log the mock employee and ID being sent
+            console.log("Mock employee data:", mockEmployee);
+            console.log("Mock employee ID:", mockId);
+
+            const response = await request(app).put(`/api/v1/employees/${mockId}`).send(mockEmployee);
+            console.log("Response from PUT request:", response.body);
+            
             expect(controllerUpdateEmployees).toHaveBeenCalled();
         });
     });

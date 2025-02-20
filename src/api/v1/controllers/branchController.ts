@@ -38,8 +38,9 @@ export const controllerUpdateBranches = async (
     res: Response,
     next: NextFunction
 ): Promise<void> => {
+    
     try {
-        
+     
         const updatedBranches: Branch = await branchService.serviceUpdateBranches(
             req.params.id,
             req.body
