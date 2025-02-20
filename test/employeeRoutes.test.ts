@@ -32,9 +32,13 @@ describe("Employee Routes", () => {
     describe("POST /api/v1/employees", () => {
         it("should call createEmployee controller", async () => {
             const mockEmployee = {
-                name: "John Doe",
-                position: "Software Engineer",
-                department: "Engineering"
+                id: "1",
+                name: "John Brown",
+                position: "Branch Manager",
+                department: "Managmenet",
+                email: "test@email.com",
+                phone:"12456789",
+                branchId: "1"
             };
 
             await request(app).post("/api/v1/employees").send(mockEmployee);
@@ -46,9 +50,14 @@ describe("Employee Routes", () => {
     describe("PUT /api/v1/employees/:id", () => {
         it("should call updateEmployee controller", async () => {
             const mockEmployee = {
-                name: "John Doe Updated",
-                position: "Senior Software Engineer",
-                department: "Engineering"
+                
+                id: "1",
+                name: "John Brown",
+                position: "Branch Manager",
+                department: "Managmenet",
+                email: "test@email.com",
+                phone:"12456789",
+                branchId: "1"
             };
 
             const mockId = 1;  

@@ -1,7 +1,7 @@
 import Joi, { ObjectSchema } from 'joi';
 
 export const employeeSchema: ObjectSchema = Joi.object({
-    id:Joi.string().min(3).max(50).required().messages({
+    id:Joi.string().min(1).max(50).required().messages({
         'string.base': 'id should be a type string',
         'string.min': 'id should have at least 3 charcters',
         'string.max': 'id should at most 50 characters',
@@ -36,7 +36,7 @@ export const employeeSchema: ObjectSchema = Joi.object({
         'string.base': 'Phone should be a type of string',
         'string.pattern.base': 'Phone number must be a valid format (e.g., +1234567890)'
         }),
-    branchId: Joi.string().min(3).max(50).required().messages({
+    branchId: Joi.string().min(1).max(50).required().messages({
         'string.base': 'Branch ID should be a type string',
         'string.min': 'Branch ID should have at least 3 charcters',
         'string.max': 'Branch ID should at most 50 characters',
