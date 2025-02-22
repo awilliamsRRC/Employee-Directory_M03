@@ -1,3 +1,10 @@
+import {
+    getDocuments,
+    createDocument,
+    updateDocument,
+    deleteDocument,
+} from "../repositories/firestoreRepository";
+
 export type Employee = {
     id: string;
     name: string;
@@ -9,10 +16,15 @@ export type Employee = {
     
 };
 
+const COLLECTION = "employees";
 const employees: Employee[] = [];
 
 export const serviceGetAllEmployees = async (): Promise<Employee[]> => {
-    return employees;
+    const snapshot = await getDocuments(COLLECTION);
+    return snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return { id: doc.id, ...data } as Employee;
+    });
 };
 
 export const serviceCreateEmployee = async (employee: {
@@ -25,35 +37,28 @@ export const serviceCreateEmployee = async (employee: {
     department: string;
 }): Promise<Employee> => {
     
-    const newEmployee: Employee = { id: Date.now().toString(), ...employee };
+    const newEmployee = {
+        name: employee.name,
+        position: employee.position,
+        email: employee.email,
+        phone: employee.phone,
+        branchId: employee.branchId,
+        department: employee.department,
+    };
 
-    
-    employees.push(newEmployee);
-    return newEmployee;
+    const docId = await createDocument(COLLECTION, newEmployee);
+    return { id: docId, ...newEmployee };
 };
 
 export const serviceUpdateEmployee = async (
     id: string,
     employee: { name: string; position: string; department: string; email:string; phone:string; branchId: number;}
 ): Promise<Employee> => { 
-    const index: number = employees.findIndex((i) => i.id === id);
+    await updateDocument(COLLECTION, id, employee);
+    return { id, ...employee };
     
-    if (index === -1) {
-        throw new Error(`Item with ID ${id} not found`);
-    }
-
-    
-    employees[index] = {   id, ...employee };
-
-    return employees[index];
 };
 
 export const serviceDeleteEmployee = async (id: string): Promise<void> => {
-    const index: number = employees.findIndex((i) => i.id === id);
-    if (index === -1) {
-        throw new Error(`Item with ID ${id} not found`);
-    }
-
-    
-    employees.splice(index, 1);
+    await deleteDocument(COLLECTION, id);
 };
