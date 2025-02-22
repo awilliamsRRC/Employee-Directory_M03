@@ -4,9 +4,7 @@ import morgan from "morgan";
 import employeeRoutes from "./api/v1/routes/employeeRoutes";
 import branchRoutes from "./api/v1/routes/branchRoutes";
 import setupSwagger from "../config/swagger";
-
-import { controllerUpdateBranches } from './api/v1/controllers/branchController'; 
-
+import errorHandler from "./api/v1/middleware/errorHandler";
 
 
 const app: Express = express();
@@ -32,6 +30,7 @@ app.get("/api/v1/health", (req:Request,res:Response) => {
 
 app.use("/api/v1/employees", employeeRoutes);
 app.use("/api/v1/branches", branchRoutes);
+app.use(errorHandler);
 
 
 
