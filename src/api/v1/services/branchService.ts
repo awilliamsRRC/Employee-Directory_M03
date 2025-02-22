@@ -1,15 +1,27 @@
 import { Request, Response, NextFunction } from "express";
-export type Branch = {
-    id: string;
-    name: string;
-    address: string;
-    phone:string;
-};
+import { Branch } from "../models/branchmodel";
+import {
+    getDocuments,
+    createDocument,
+    updateDocument,
+    deleteDocument,
+} from "../repositories/firestoreRepository";
+
+const COLLECTION = "branches";
+
+
 
 const branches: Branch[] = [];
 
 export const serviceGetAllBranches = async (): Promise<Branch[]> => {
-    return branches;
+    const snapshot: FirebaseFirestore.QuerySnapshot = await getDocuments(
+        COLLECTION
+    );
+
+    return snapshot.docs.map((doc) => {
+        const data: FirebaseFirestore.DocumentData = doc.data();
+        return { id: doc.id, ...data } as Branch;
+    });
 };
 
 export const serviceCreateBranches = async (branch: {
@@ -17,11 +29,15 @@ export const serviceCreateBranches = async (branch: {
     address: string;
     phone: string;
 }): Promise<Branch> => {
-    const newBranch: Branch = { id: Date.now().toString(), ...branch };
+    const newBranch: Omit<Branch, 'id'> = { 
+        name: branch.name, 
+        address: branch.address,
+        phone: branch.phone,
+    };
 
-    
-    branches.push(newBranch);
-    return newBranch;
+    const docId = await createDocument(COLLECTION,newBranch);
+   
+    return { id: docId, ...newBranch };
 };
 
 export const serviceUpdateBranches = async (
@@ -29,24 +45,12 @@ export const serviceUpdateBranches = async (
     branch: {name: string; address: string; phone:string;}
 ): Promise<Branch> => {
     
-    const index: number = branches.findIndex((i) => i.id === id);
-    // if the index is not found we expects a -1
-    if (index === -1) {
-        throw new Error(`Item with ID ${id} not found`);
-    }
-
+    await updateDocument(COLLECTION, id, branch);
+    return { id, ...branch } as Branch;
     
-    branches[index] = {   id,...branch };
-
-    return branches[index];
 };
 
 export const serviceDeleteBranches = async (id: string): Promise<void> => {
-    const index: number = branches.findIndex((i) => i.id === id);
-    if (index === -1) {
-        throw new Error(`Item with ID ${id} not found`);
-    }
+    await deleteDocument(COLLECTION, id);
 
-    
-    branches.splice(index, 1);
 };
