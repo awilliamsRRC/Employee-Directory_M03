@@ -55,6 +55,7 @@ const errorHandler = (
         res.status(err.statusCode).json(errorResponse(err.message, err.code));
     } else if(err instanceof ControlError){
         res.status(err.statusCode).json(errorResponse(err.message, err.code));
+        
     } else if (err instanceof RouteError){
         res.status(err.statusCode).json(errorResponse(err.message, err.code));
     } else if(err instanceof ValidationError){

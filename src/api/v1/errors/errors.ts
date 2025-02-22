@@ -1,3 +1,4 @@
+import { CONTROL_ERROR_CODE, ROUTE_ERROR_CODE,VALIDATION_ERROR_CODE } from "../../../constants/errorConstants";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 
 /**
@@ -65,11 +66,11 @@ export class ControlError extends Error {
      * Creates a new ControlError instance.
      * @param {string} message - The error message.
      * @param {string} code - The error code.
-     * @param {number} code - The the http response code.
+     * @param {number} statusCode - The the http response code.
      */
     constructor(
-        message: string,
-        code: string,
+        message: string = "Server was not reached." ,
+        code: string = CONTROL_ERROR_CODE,
         statusCode: number = HTTP_STATUS.BAD_REQUEST
     ) {
         super(message);
@@ -77,6 +78,7 @@ export class ControlError extends Error {
         this.code = code;
         this.statusCode = statusCode;
     }
+    
 }
 /**
  * Class representing a Router error.
@@ -93,8 +95,8 @@ export class RouteError extends Error {
      * @param {number} code - The the http response code.
      */
     constructor(
-        message: string,
-        code: string,
+        message: string = "Client Enter Wrong Route",
+        code: string = ROUTE_ERROR_CODE,
         statusCode: number = HTTP_STATUS.NOT_FOUND
     ) {
         super(message);
@@ -118,8 +120,8 @@ export class ValidationError extends Error {
      * @param {number} code - The the http response code.
      */
     constructor(
-        message: string,
-        code: string,
+        message: string = " incorrect data format.",
+        code: string = VALIDATION_ERROR_CODE,
         statusCode: number = HTTP_STATUS.INTERNAL_SERVER_ERROR
     ) {
         super(message);
