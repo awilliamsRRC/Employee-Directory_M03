@@ -70,7 +70,7 @@ export class ControlError extends Error {
     constructor(
         message: string,
         code: string,
-        statusCode: number = HTTP_STATUS.INTERNAL_SERVER_ERROR
+        statusCode: number = HTTP_STATUS.BAD_REQUEST
     ) {
         super(message);
         this.name = "ControlError";
@@ -95,7 +95,7 @@ export class RouteError extends Error {
     constructor(
         message: string,
         code: string,
-        statusCode: number = HTTP_STATUS.INTERNAL_SERVER_ERROR
+        statusCode: number = HTTP_STATUS.NOT_FOUND
     ) {
         super(message);
         this.name = "RouteError";

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { RepositoryError, ServiceError } from "../errors/errors";
+import { ControlError, RepositoryError, RouteError, ServiceError, ValidationError } from "../errors/errors";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 import { errorResponse } from "../models/responseModel";
 
@@ -53,7 +53,14 @@ const errorHandler = (
 
     if (err instanceof RepositoryError || err instanceof ServiceError) {
         res.status(err.statusCode).json(errorResponse(err.message, err.code));
-    } else {
+    } else if(err instanceof ControlError){
+        res.status(err.statusCode).json(errorResponse(err.message, err.code));
+    } else if (err instanceof RouteError){
+        res.status(err.statusCode).json(errorResponse(err.message, err.code));
+    } else if(err instanceof ValidationError){
+        res.status(err.statusCode).json(errorResponse(err.message, err.code));
+    }
+    else {
         res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(
             errorResponse("An unexpected error occurred", "UNKNOWN_ERROR")
         );
