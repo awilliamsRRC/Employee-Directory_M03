@@ -20,6 +20,6 @@
         },
         "sourceMap": true
     },
-    "include": ["src/**/*", "test/**/*", "config/**/*"],
+    "include": ["src/**/*", "test/**/*", "config/**/*", "src/api/v1/schemas/branchSchema.ts", "src/api/v1/schemas/employeeSchema.ts"],
     "exclude": ["node_modules", "dist"]
 }
