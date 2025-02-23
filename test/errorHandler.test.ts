@@ -162,7 +162,7 @@ describe("Error Handler Middleware", () => {
         const testError = new RouteError(
             "Document not found",
             "DOCUMENT_NOT_FOUND",
-            400
+            404
         );
 
         // Act

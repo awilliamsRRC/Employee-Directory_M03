@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Branch } from "../models/branchmodel";
+//import { Branch } from "../models/branchmodel";
 import {
     getDocuments,
     createDocument,
@@ -10,7 +10,12 @@ import {
 const COLLECTION = "branches";
 
 
-
+export type Branch = {
+    id: string;
+    name: string;
+    address: string;
+    phone:string;
+};
 const branches: Branch[] = [];
 
 export const serviceGetAllBranches = async (): Promise<Branch[]> => {
