@@ -32,7 +32,8 @@ jobs:
             - name: Set up Firebase credentials
               run: |
                 echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
-                echo "FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}" >> $GITHUB_ENV
+                # Handle newlines in the private key by replacing `\n` with actual newlines
+                echo "FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}" | sed 's/\\n/\n/g' >> $GITHUB_ENV
                 echo "FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}" >> $GITHUB_ENV
 
             # Install dependencies defined in the package.json file
