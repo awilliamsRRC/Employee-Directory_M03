@@ -1,11 +1,12 @@
 {
   "name": "employee_directory_m03",
   "version": "1.0.0",
-  "main": "jest.config.js",
+  "main": "src/api/v1/services/branchService.ts",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "clean": "rm -rf dist",
     "build": "tsc",
     "start": "ts-node src/server.ts",
     "test": "jest"
@@ -26,7 +27,7 @@
     "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },

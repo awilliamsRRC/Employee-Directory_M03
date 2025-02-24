@@ -18,6 +18,7 @@ import {
 } from "firebase-admin/firestore";
 
 
+
 jest.mock("../src/api/v1/repositories/firestoreRepository", () => ({
     getDocuments: jest.fn(),
     createDocument: jest.fn(),
@@ -62,6 +63,8 @@ describe("Branch Service", () => {
             } as QuerySnapshot;
 
             (getDocuments as jest.Mock).mockResolvedValue(mockSnapshot);
+            console.log(getDocuments);
+
 
             const result: Branch[] = await serviceGetAllBranches();
 

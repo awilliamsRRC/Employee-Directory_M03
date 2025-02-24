@@ -65,6 +65,8 @@ describe("Employee Service", () => {
             } as QuerySnapshot;
 
             (getDocuments as jest.Mock).mockResolvedValue(mockSnapshot);
+            console.log(getDocuments);
+
 
             const result: Employee[] = await serviceGetAllEmployees();
 
