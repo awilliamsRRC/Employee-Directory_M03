@@ -10,12 +10,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}  # Add any necessary environment variables
+      FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js
+      
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
-      - run: npm install
-      - run: npm test
+          node-version: '14'
+
+      - name: Install dependencies
+        run:
