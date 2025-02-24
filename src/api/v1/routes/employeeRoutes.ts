@@ -1,5 +1,7 @@
 import express, { Router } from "express";
 import * as employeesController from "../controllers/employeesController";
+import { employeeSchema } from "../schemas/employeeSchema";
+import { validateRequest } from "../middleware/validate";
 
 const routerEmployee: Router = express.Router();
 
@@ -83,7 +85,7 @@ routerEmployee.get("/", employeesController.controllerGetAllEmployees);
  *       500:
  *         description: Internal server error
  */
-routerEmployee.post("/", employeesController.controllerCreateEmployees);
+routerEmployee.post("/", validateRequest(employeeSchema),employeesController.controllerCreateEmployees);
 
 /**
  * @openapi
@@ -125,7 +127,7 @@ routerEmployee.post("/", employeesController.controllerCreateEmployees);
  *       500:
  *         description: Internal server error
  */
-routerEmployee.put("/:id", employeesController.controllerUpdateEmployees);
+routerEmployee.put("/:id", validateRequest(employeeSchema),employeesController.controllerUpdateEmployees);
 
 /**
  * @openapi

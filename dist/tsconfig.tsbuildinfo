@@ -1,1 +1,0 @@
-{"root":["../src/app.ts","../src/server.ts","../src/api/v1/controllers/branchcontroller.ts","../src/api/v1/controllers/employeescontroller.ts","../src/api/v1/routes/branchroutes.ts","../src/api/v1/routes/employeeroutes.ts","../src/api/v1/services/branchservice.ts","../src/api/v1/services/employeesservice.ts","../test/app.test.ts","../test/health.test.ts"],"version":"5.7.3"}
