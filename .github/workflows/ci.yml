@@ -28,6 +28,13 @@ jobs:
                   # Specify the Node.js version (v22.11.0)
                   node-version: "22"  
 
+            # Set up Firebase credentials (from secrets)
+            - name: Set up Firebase credentials
+              run: |
+                echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
+                echo "FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}" >> $GITHUB_ENV
+                echo "FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}" >> $GITHUB_ENV
+
             # Install dependencies defined in the package.json file
             - run: npm install  
 
