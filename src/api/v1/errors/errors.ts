@@ -87,7 +87,6 @@ export class ControlError extends Error {
 export class RouteError extends Error {
     code: string;
     statusCode: number;
-
     /**
      * Creates a new RouteError instance.
      * @param {string} message - The error message.

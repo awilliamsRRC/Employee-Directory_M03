@@ -15,7 +15,9 @@ describe("Employee Controller", () => {
         mockRes = { status: jest.fn().mockReturnThis(), json: jest.fn(), send: jest.fn() };  
         mockNext = jest.fn();  
     });
-
+    /**
+     * Tests successful retrieval of all employees.
+     */
     describe("getAllEmployees", () => {
         it("should handle successful operation", async () => {
             const mockEmployees = [
@@ -37,7 +39,9 @@ describe("Employee Controller", () => {
                 data: mockEmployees,
             });  
         });
-
+        /**
+         * Tests error handling in case of failure while retrieving employees.
+         */
         it("should handle errors in getAllEmployees", async () => {
             const mockError = new Error("Error retrieving employees");
             (employeeService.serviceGetAllEmployees as jest.Mock).mockRejectedValue(mockError);  
@@ -51,7 +55,9 @@ describe("Employee Controller", () => {
             expect(mockNext).toHaveBeenCalledWith(mockError);  
         });
     });
-
+    /**
+     * Tests the controller for creating an employee
+     */
     describe("createEmployee", () => {
         it("should create an employee successfully", async () => {
             const mockEmployee = {
@@ -84,7 +90,9 @@ describe("Employee Controller", () => {
                 data: mockEmployee,
             });  
         });
-
+        /**
+         * Tests error handling during employee creation.
+         */
         it("should handle errors in createEmployee", async () => {
             const mockError = new Error("Error creating employee");
             (employeeService.serviceCreateEmployee as jest.Mock).mockRejectedValue(mockError);  
@@ -98,8 +106,13 @@ describe("Employee Controller", () => {
             expect(mockNext).toHaveBeenCalledWith(mockError);  
         });
     });
-
+    /**
+     * Tests the controller for updating an employee
+     */
     describe("updateEmployee", () => {
+        /**
+         * Tests successful update of an employee.
+         */
         it("should update an employee successfully", async () => {
             const mockId = "1";  
             const mockUpdatedEmployee = {
@@ -131,7 +144,9 @@ describe("Employee Controller", () => {
                 data: mockUpdatedEmployee,
             });  
         });
-
+        /**
+         * Tests error handling during employee update.
+         */
         it("should handle errors in updateEmployee", async () => {
             const mockError = new Error("Error updating employee");
             (employeeService.serviceUpdateEmployee as jest.Mock).mockRejectedValue(mockError);  
@@ -145,8 +160,13 @@ describe("Employee Controller", () => {
             expect(mockNext).toHaveBeenCalledWith(mockError);  
         });
     });
-
+    /**
+     * Tests the controller for deleting an employee
+     */
     describe("deleteEmployee", () => {
+        /**
+         * Tests successful deletion of an employee.
+         */
         it("should delete an employee successfully", async () => {
             const mockId = "1";  
 
@@ -164,7 +184,9 @@ describe("Employee Controller", () => {
             expect(mockRes.status).toHaveBeenCalledWith(200);  
             expect(mockRes.send).toHaveBeenCalledWith({ message: "Employee Deleted" });  
         });
-
+        /**
+         * Tests error handling during employee deletion.
+         */
         it("should handle errors in deleteEmployee", async () => {
             const mockError = new Error("Error deleting employee");
             (employeeService.serviceDeleteEmployee as jest.Mock).mockRejectedValue(mockError);  

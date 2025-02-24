@@ -14,12 +14,27 @@ jest.mock("../src/api/v1/controllers/branchController", () => ({
     controllerUpdateBranches: jest.fn((req, res) => res.status(200).send()),
     controllerDeleteBranches: jest.fn((req, res) => res.status(200).send()),
 }));
-
+/**
+ * Test suite for Branch Routes.
+ * 
+ * This suite tests the API routes for branch-related operations, including
+ * getting all branches, creating a new branch, updating an existing branch,
+ * and deleting a branch. Each test ensures that the correct controller function
+ * is called and that the correct HTTP status codes are returned.
+ * 
+ * @group BranchRoutes
+ */
 describe("Branch Routes", () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
-
+    /**
+   * Test for the GET `/api/v1/branches` route.
+   * This test ensures that the controller for fetching all branches is called correctly
+   * and that the response returns with a 200 status code.
+   * 
+   * @test {GET /api/v1/branches}
+   */
     describe("GET /api/v1/branches", () => {
         it("should call getAll Branches controller", async () => {
             const response = await request(app).get("/api/v1/branches");
@@ -27,7 +42,13 @@ describe("Branch Routes", () => {
             expect(response.status).toBe(200);
         });
     });
-
+    /**
+   * Test for the POST `/api/v1/branches` route.
+   * This test ensures that the controller for creating a new branch is called correctly
+   * and that the response returns with a 201 status code upon successful creation.
+   * 
+   * @test {POST /api/v1/branches}
+   */
     describe("POST /api/v1/branches", () => {
         it("should call createBranchescontroller", async () => {
             const mockBranch = {
@@ -43,7 +64,13 @@ describe("Branch Routes", () => {
             expect(response.status).toBe(201);
         });
     });
-
+    /**
+   * Test for the PUT `/api/v1/branches/:id` route.
+   * This test ensures that the controller for updating an existing branch is called correctly
+   * and that the response returns with a 200 status code after the update.
+   * 
+   * @test {PUT /api/v1/branches/:id}
+   */
     describe("PUT /api/v1/branches/:id", () => {
         it("should call updateBranchescontroller", async () => {
             const mockBranch = {
@@ -64,7 +91,13 @@ describe("Branch Routes", () => {
 
         });
     });
-
+    /**
+   * Test for the DELETE `/api/v1/branches/:id` route.
+   * This test ensures that the controller for deleting an existing branch is called correctly.
+   * It verifies that the correct status code is returned upon successful deletion.
+   * 
+   * @test {DELETE /api/v1/branches/:id}
+   */
     describe("DELETE /api/v1/branches/:id", () => {
         it("should call deleteBranch controller", async () => {
             const mockId = 1;

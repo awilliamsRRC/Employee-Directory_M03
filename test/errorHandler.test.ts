@@ -22,7 +22,9 @@ describe("Error Handler Middleware", () => {
         };
         mockNext = jest.fn();
     });
-
+    /**
+     * Tests handling of a RepositoryError with a custom status and error code.
+     */
     it("should handle RepositoryError with custom status code and error code", () => {
         // Arrange
         const testError = new RepositoryError(
@@ -46,7 +48,9 @@ describe("Error Handler Middleware", () => {
         );
         expect(console.error).toHaveBeenCalledWith("Error: Document not found");
     });
-
+    /**
+     * Tests handling of a ServiceError with a custom status and error code.
+     */
     it("should handle ServiceError with custom status code and error code", () => {
         // Arrange
         const testError = new ServiceError(
@@ -69,7 +73,9 @@ describe("Error Handler Middleware", () => {
             errorResponse("Invalid input", "INVALID_INPUT")
         );
     });
-
+    /**
+     * Tests handling of a basic Error object with default status and error code.
+     */
     it("should handle basic Error object with default status and code", () => {
         // Arrange
         const testError = new Error("Basic error");
@@ -89,7 +95,9 @@ describe("Error Handler Middleware", () => {
         );
         expect(console.error).toHaveBeenCalledWith("Error: Basic error");
     });
-
+    /**
+     * Tests handling of malformed Error objects.
+     */
     it("should handle malformed Error objects", () => {
         // Arrange
         const testError = {} as Error;
@@ -109,7 +117,9 @@ describe("Error Handler Middleware", () => {
         );
         expect(console.error).toHaveBeenCalledWith("Error: undefined");
     });
-
+    /**
+     * Tests handling of null errors.
+     */
     it("should handle null errors", () => {
         // Arrange
         const testError = null;
@@ -131,6 +141,9 @@ describe("Error Handler Middleware", () => {
             "Error: null or undefined error received"
         );
     });
+    /**
+     * Tests handling of a ControlError with a custom status and error code.
+     */
 
     it("It should test Control Error with custom and error code", () => {
         // Arrange
@@ -157,6 +170,9 @@ describe("Error Handler Middleware", () => {
         
 
     });
+    /**
+     * Tests handling of a RouteError with a custom status and error code.
+     */
     it("It should test Route Error with custom and error code", () => {
         // Arrange
         const testError = new RouteError(
@@ -182,6 +198,9 @@ describe("Error Handler Middleware", () => {
         
 
     });
+     /**
+     * Tests handling of a ValidationError with a custom status and error code.
+     */
     it("It should test Validate Error with custom and error code", () => {
         // Arrange
         const testError = new ValidationError(

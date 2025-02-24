@@ -29,7 +29,17 @@ interface FieldValuePair {
     fieldValue: FirestoreDataTypes;
 }
 
-
+/**
+ * Executes a Firestore transaction and handles errors if they occur.
+ * 
+ * @async
+ * @function runTransaction
+ * @template T - The type of the result returned by the transaction operation.
+ * @param {Function} operations - A function that takes a Firestore `Transaction` object and performs operations within the transaction.
+ * @param {FirebaseFirestore.Transaction} operations.transaction - The Firestore transaction object passed to the operation function.
+ * @returns {Promise<T>} A promise that resolves with the result of the transaction operation.
+ * @throws {RepositoryError} If the transaction fails, a custom `RepositoryError` is thrown with error details.
+ */
 export const runTransaction = async <T>(
     operations: (transaction: FirebaseFirestore.Transaction) => Promise<T>
 ): Promise<T> => {

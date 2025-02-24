@@ -26,6 +26,16 @@ jest.mock("../src/api/v1/repositories/firestoreRepository", () => ({
     deleteDocument:jest.fn(),
     getDocumentsByFieldValue: jest.fn(),
 }));
+/**
+ * Test suite for Branch Service functions.
+ * 
+ * This suite tests the service functions for interacting with branch data, including
+ * retrieving, creating, updating, and deleting branches. Each test ensures that the 
+ * corresponding service function calls the required database functions and returns
+ * the expected results.
+ * 
+ * @group BranchService
+ */
 describe("Branch Service", () => {
     describe("getDocuments", () => {
         beforeEach(() => {
@@ -92,9 +102,12 @@ describe("Branch Service", () => {
             });
         });
     });
-
-    
-
+    /**
+   * Test for the `createBranch` service function.
+   * This test ensures that a new branch is created and returned with an ID.
+   * 
+   * @test {createDocument}
+   */
     describe("Branch Service - createBranch", () => {
         it("should create a new branch and return it with an id", async () => {
             const newBranchData = {
@@ -121,7 +134,12 @@ describe("Branch Service", () => {
             });
         });
     });
-
+    /**
+   * Test for the `updateBranch` service function.
+   * This test ensures that an existing branch is updated and returned with the updated data.
+   * 
+   * @test {updateDocument}
+   */
     describe("Branch Service - Update Branch", () => {
         beforeEach(() => {
             jest.clearAllMocks(); 
@@ -148,7 +166,12 @@ describe("Branch Service", () => {
             });
         });
     });
-
+    /**
+   * Test for the `deleteBranch` service function.
+   * This test ensures that an existing branch is deleted without any return value.
+   * 
+   * @test {deleteDocument}
+   */
     describe("Branch Service - Delete Branch", () => {
         beforeEach(() => {
             jest.clearAllMocks(); // Ensure mocks are cleared before each test

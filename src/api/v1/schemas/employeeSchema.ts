@@ -1,5 +1,20 @@
 import Joi, { ObjectSchema } from 'joi';
-
+/**
+ * Joi schema for validating employee data.
+ * 
+ * @constant {ObjectSchema} employeeSchema - The Joi schema used to validate employee data.
+ * @description
+ * This schema validates the following fields for an employee:
+ * - `id`: A required string with a minimum length of 1 and a maximum length of 50 characters.
+ * - `name`: A required string with a minimum length of 3 and a maximum length of 50 characters.
+ * - `position`: A required string with a minimum length of 3 and a maximum length of 50 characters.
+ * - `department`: A required string with a minimum length of 3 and a maximum length of 50 characters.
+ * - `email`: A required string with a minimum length of 3 and a maximum length of 50 characters.
+ * - `phone`: An optional string that must match a valid phone number format (e.g., +1234567890).
+ * - `branchId`: A required string with a minimum length of 1 and a maximum length of 50 characters.
+ * 
+ * The schema also provides custom error messages for each validation rule.
+ */
 export const employeeSchema: ObjectSchema = Joi.object({
     id:Joi.string().min(1).max(50).required().messages({
         'string.base': 'id should be a type string',
