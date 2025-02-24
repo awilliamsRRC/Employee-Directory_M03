@@ -1,43 +1,17 @@
-# Name of the workflow
-name: Node.js CI  
-
-# Define the events that will trigger the workflow
+name: Node.js CI
 on:
-    # Trigger on push events to the 'main' branch
     push:
-        branches: [main]  
-    # Trigger on pull request events targeting the 'main' branch
+        branches: [main]
     pull_request:
-        branches: [main]  
-
+        branches: [main]
 jobs:
-    # Define a job called 'build'
     build:
-        # Set the environment to run on an Ubuntu runner
-        runs-on: ubuntu-latest  
-
-        # Define the steps within the job
+        runs-on: ubuntu-latest
         steps:
-            # Checkout the code from the repository
-            - uses: actions/checkout@v3  
-            
-            # Set up Node.js version 22 on the runner
-            - name: Use Node.js  
-              uses: actions/setup-node@v2  
+            - uses: actions/checkout@v2
+            - name: Use Node.js
+              uses: actions/setup-node@v2
               with:
-                  # Specify the Node.js version (v22.11.0)
-                  node-version: "22"  
-
-            # Set up Firebase credentials (from secrets)
-            - name: Set up Firebase credentials
-              run: |
-                echo "FIREBASE_PROJECT_ID=${{ secrets.FIREBASE_PROJECT_ID }}" >> $GITHUB_ENV
-                # Handle newlines in the private key by replacing `\n` with actual newlines
-                echo "FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}" | sed 's/\\n/\n/g' >> $GITHUB_ENV
-                echo "FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}" >> $GITHUB_ENV
-
-            # Install dependencies defined in the package.json file
-            - run: npm install  
-
-            # Run the tests defined in the 'test' script in package.json
-            - run: npm test  
+                  node-version: "14"
+            - run: npm install
+            - run: npm test
